@@ -29,6 +29,7 @@ export type NavigatorParamList = {
   demoList: undefined
   // 🔥 Your screens go here
   "test-screen": undefined
+  "simple-home-screen": undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/

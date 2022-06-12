@@ -1,6 +1,6 @@
 import { Platform } from "react-native"
 import React from "react"
-import { Box, Text, View, Image } from "native-base"
+import { Box, Text, View, Image, Center } from "native-base"
 
 export const TestScreen = () => {
   console.log(Platform.OS)
@@ -20,9 +20,31 @@ export const TestScreen = () => {
           borderWidth={2}
         />
       </Box>
+      <Text fontSize="xl" color="white" fontFamily="eng">
+        Here I am, {Platform.OS}
+      </Text>
+
       <Text fontSize="xl" color="white">
         Here I am, {Platform.OS}
       </Text>
+
+      <Text fontSize={["xl", "xl", "2xl"]} color="white" fontFamily="kor" fontWeight={900}>
+        Here I am, {Platform.OS}
+      </Text>
+
+      <Center flex={1}>
+        <Center
+          bg="amber.600"
+          // _text={{
+          //   color: "white",
+          // }}
+          rounded="xl"
+          w={[24, 48, 72]}
+          h={24}
+        >
+          This is a box
+        </Center>
+      </Center>
     </View>
   )
 }
