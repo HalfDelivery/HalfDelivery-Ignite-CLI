@@ -5,6 +5,9 @@ module.exports = async function (env, argv) {
   const config = await createExpoWebpackConfigAsync(env, argv)
   // If you want to add a new alias to the config.
   // config.resolve.alias["moduleA"] = "moduleB"
+  // config.resolve.alias["moduleA"] = "moduleB"
+  //? react-native-web 셋업
+  config.resolve.alias["react-native$"] = "react-native-web"
 
   // Maybe you want to turn off compression in dev mode.
   if (config.mode === "development") {
