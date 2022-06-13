@@ -1,9 +1,12 @@
-import { Platform } from "react-native"
+import { Platform, Dimensions } from "react-native"
 import React from "react"
 import { Box, Text, View, Image, Center } from "native-base"
+import { HEIGHT, WIDTH } from "../../theme/device-size-constant"
 
 export const TestScreen = () => {
   console.log(Platform.OS)
+  console.log(WIDTH)
+  console.log(HEIGHT)
   return (
     <View bgColor="blue.800" flex={1}>
       <Box bg="yellow.400" p="12">
@@ -29,7 +32,10 @@ export const TestScreen = () => {
       </Text>
 
       <Text fontSize={["xl", "xl", "2xl"]} color="white" fontFamily="kor" fontWeight={900}>
-        Here I am, {Platform.OS}
+        width: {Dimensions.get("window").width} {"\n"}
+        height: {Dimensions.get("screen").height} {"\n"}
+        {WIDTH} {"\n"}
+        {HEIGHT}
       </Text>
 
       <Center flex={1}>
