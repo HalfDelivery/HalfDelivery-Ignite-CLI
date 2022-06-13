@@ -21,6 +21,7 @@ import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
 import { NativeBaseProvider } from "native-base"
 import { nativeBaseTheme } from "./theme"
+import { LinearGradient } from "expo-linear-gradient"
 
 // This puts screens in a native ViewController or Activity. If you want fully native
 // stack navigation, use `createNativeStackNavigator` in place of `createStackNavigator`:
@@ -56,12 +57,19 @@ function App() {
   if (!rootStore || !isNavigationStateRestored) return null
 
   // otherwise, we're ready to render the app
+
+  const config = {
+    dependencies: {
+      "linear-gradient": LinearGradient,
+    },
+  }
+
   return (
     <ToggleStorybook>
       <RootStoreProvider value={rootStore}>
         <SafeAreaProvider initialMetrics={initialWindowMetrics}>
           <ErrorBoundary catchErrors={"always"}>
-            <NativeBaseProvider theme={nativeBaseTheme}>
+            <NativeBaseProvider theme={nativeBaseTheme} config={config}>
               <AppNavigator
                 initialState={initialNavigationState}
                 onStateChange={onNavigationStateChange}

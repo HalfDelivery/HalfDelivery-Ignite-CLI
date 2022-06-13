@@ -10,6 +10,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { WelcomeScreen, DemoScreen, DemoListScreen, TestScreen } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
+import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -41,12 +42,13 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="test-screen"
+      initialRouteName="simple-home-screen"
     >
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />
       <Stack.Screen name="test-screen" component={TestScreen} />
+      <Stack.Screen name="simple-home-screen" component={SimpleHomeScreen} />
       {/** 🔥 Your screens go here */}
     </Stack.Navigator>
   )
