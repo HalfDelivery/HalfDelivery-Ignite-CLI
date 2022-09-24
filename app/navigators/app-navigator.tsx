@@ -8,7 +8,14 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import { NavigationContainer, DefaultTheme, DarkTheme } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { WelcomeScreen, DemoScreen, DemoListScreen, TestScreen } from "../screens"
+import {
+  WelcomeScreen,
+  DemoScreen,
+  DemoListScreen,
+  TestScreen,
+  SignInScreen,
+  MainScreen,
+} from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
 
@@ -30,7 +37,8 @@ export type NavigatorParamList = {
   demoList: undefined
   // 🔥 Your screens go here
   "test-screen": undefined
-  "simple-home-screen": undefined
+  signIn: undefined
+  main: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -42,14 +50,16 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="simple-home-screen"
+      initialRouteName="main"
     >
+      <Stack.Screen name="main" component={MainScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />
       <Stack.Screen name="test-screen" component={TestScreen} />
       <Stack.Screen name="simple-home-screen" component={SimpleHomeScreen} />
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="signIn" component={SignInScreen} />
     </Stack.Navigator>
   )
 }

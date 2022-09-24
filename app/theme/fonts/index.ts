@@ -7,7 +7,6 @@ export const initFonts = async () => {
   // ⬇
   await Font.loadAsync({
     Poppins: require("./Poppins-Regular.ttf"),
-    "Poppins-Bold": require("./Poppins-Bold.ttf"),
     "Poppins-Regular": require("./Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("./Poppins-SemiBold.ttf"),
 
