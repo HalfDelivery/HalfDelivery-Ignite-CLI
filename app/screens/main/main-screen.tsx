@@ -19,6 +19,7 @@ import {
   Link,
 } from "native-base"
 import { stores as _stores } from "../../../assets/sampleData/stores"
+import { CountUp, useCountUp } from "use-count-up" //? https://github.com/vydimitrov/use-count-up
 
 const Store = ({ imgUri, id, setState, state }) => (
   <Pressable
@@ -97,6 +98,8 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
     const [platform, setPlatform] = useState("배달의 민족")
     const [location, setLocation] = useState("창의관")
 
+    const [isCounting, setIsCounting] = useState(true)
+
     // useLayoutEffect(() => {
     //   // setStores(_stores)
     //   console.log(storeId)
@@ -111,6 +114,19 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
         UIManager.setLayoutAnimationEnabledExperimental(true)
       }
     }
+
+    //? 5초에 한번씩 구현을 위한 코드
+    useEffect(() => {
+      setInterval(() => {
+        setIsCounting(!isCounting)
+      }, 5000)
+    }, [step])
+
+    const { value: recentMatchingNumber } = useCountUp({
+      isCounting: isCounting,
+      end: 9999,
+      duration: 1000,
+    })
 
     return (
       // <Screen style={ROOT} preset="scroll">
@@ -138,7 +154,9 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                   fontFamily="kr"
                 />
                 <Text
-                  children={`${Date.now() % 1000} 명`}
+                  children={`${parseInt(recentMatchingNumber.toString())
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 명`}
                   color="white"
                   fontSize="xl"
                   fontWeight="600"
