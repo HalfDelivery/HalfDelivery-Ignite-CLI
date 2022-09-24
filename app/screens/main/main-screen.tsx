@@ -93,10 +93,10 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
 
     const [step, setStep] = useState(1)
     const [stores, setStores] = useState(_stores)
-    const [storeId, setStoreId] = useState(1)
+    const [storeId, setStoreId] = useState(null)
     const [role, setRole] = useState("master")
-    const [platform, setPlatform] = useState("배달의 민족")
-    const [location, setLocation] = useState("창의관")
+    const [platform, setPlatform] = useState(null)
+    const [location, setLocation] = useState(null)
 
     const [isCounting, setIsCounting] = useState(true)
 
@@ -167,14 +167,22 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
             </Box>
 
             {/* //* 1. 매장 선택 */}
-            <Box bg={step === 1 ? "p.700" : "gray.300"} borderRadius="sm" px="4" py="4" shadow="2">
+            <Box
+              bg={step === 1 ? "p.700" : storeId !== null ? "p.100" : "gray.300"}
+              borderRadius="sm"
+              px="4"
+              py="4"
+              shadow="2"
+            >
               <Text
                 children={
                   step === 2 || step === 3
-                    ? stores.filter((item) => item.id === storeId)[0].store
-                    : "주문하실 매장을 선택해주세요"
+                    ? storeId !== null
+                      ? stores.filter((item) => item.id === storeId)[0].store
+                      : "매장 미선택"
+                    : "STEP 1. 주문하실 매장을 선택해주세요"
                 }
-                color={step === 1 ? "white" : "gray.400"}
+                color={step === 1 ? "white" : "black"}
                 fontSize="lg"
                 fontWeight={step === 1 ? "600" : "400"}
                 fontFamily="kr"
@@ -224,7 +232,7 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
 
             {/* //* 2. 역할 선택 */}
             <Box
-              bg={step === 2 ? "primary.700" : "gray.300"}
+              bg={step === 2 ? "primary.700" : platform !== null ? "p.100" : "gray.300"}
               borderRadius="sm"
               px="4"
               py="4"
@@ -232,13 +240,18 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
             >
               <Text
                 children={
-                  step === 3
-                    ? role === "master"
+                  step === 2
+                    ? "STEP 2. 이용 역할을 선택해주세요"
+                    : role === "master"
+                    ? platform !== null
                       ? `[마스터] ${platform}`
-                      : "[파트너]"
-                    : "이용 역할을 선택해주세요"
+                      : "[마스터] 플랫폼 미선택"
+                    : role === "partner" && "파트너"
+
+                  // `[마스터] 플랫폼 미선택`
+                  // : platform !== null
                 }
-                color={step === 2 ? "white" : "gray.400"}
+                color={step === 2 ? "white" : "black"}
                 fontSize="lg"
                 fontWeight={step === 2 ? "600" : "400"}
                 fontFamily="kr"
@@ -373,15 +386,21 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
 
             {/* //* 3. 장소 선택 */}
             <Box
-              bg={step === 3 ? "primary.700" : "gray.300"}
+              bg={step === 3 ? "primary.700" : location !== null ? "p.100" : "gray.300"}
               borderRadius="sm"
               px="4"
               py="4"
               shadow="2"
             >
               <Text
-                children={step === 3 ? "음식을 받을 장소를 선택해주세요" : "장소 선택"}
-                color={step === 3 ? "white" : "gray.400"}
+                children={
+                  step === 3
+                    ? "STEP3. 음식을 받을 장소를 선택해주세요"
+                    : location !== null
+                    ? location
+                    : "장소 선택"
+                }
+                color={step === 3 ? "white" : "black"}
                 fontSize="lg"
                 fontWeight={step === 3 ? "600" : "400"}
                 fontFamily="kr"
