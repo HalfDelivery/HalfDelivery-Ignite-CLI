@@ -6,10 +6,12 @@ export const initFonts = async () => {
   // Welcome back! Just uncomment this and replace/append with your font file names!
   // ⬇
   await Font.loadAsync({
+    en: require("./Poppins-Regular.ttf"),
     Poppins: require("./Poppins-Regular.ttf"),
     "Poppins-Regular": require("./Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("./Poppins-SemiBold.ttf"),
 
+    kr: require("./Pretendard-Regular.ttf"),
     Pretendard: require("./Pretendard-Regular.ttf"),
     "Pretendard-Bold": require("./Pretendard-Bold.ttf"),
     "Pretendard-Medium": require("./Pretendard-Medium.ttf"),

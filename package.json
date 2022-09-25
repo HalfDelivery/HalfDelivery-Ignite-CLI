@@ -47,6 +47,7 @@
     "react": "17.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-43.0.0.tar.gz",
     "react-native-gesture-handler": "1.10.3",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-keychain": "6.2.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "3.8.0",
@@ -54,6 +55,7 @@
     "reactotron-mst": "3.1.4",
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "5.0.1",
+    "styled-components": "^5.3.5",
     "use-count-up": "^3.0.1",
     "validate.js": "0.13.1"
   },

@@ -39,6 +39,7 @@ const Store = ({ imgUri, id, setState, state }) => (
         size="sm"
         borderRadius={"xl"}
         borderWidth={id === state ? 1.5 : 0}
+        borderColor="black"
       />
     </Box>
   </Pressable>
@@ -72,6 +73,7 @@ const DeliveryPlatform = ({ name, setState, state }) => (
         size="sm"
         borderRadius={"xl"}
         borderWidth={name === state ? 1.5 : 0}
+        borderColor="black"
       />
     </Box>
   </Pressable>
@@ -99,6 +101,7 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
     const [location, setLocation] = useState(null)
 
     const [isCounting, setIsCounting] = useState(true)
+    const [isAllSet, setIsAllSet] = useState(false)
 
     // useLayoutEffect(() => {
     //   // setStores(_stores)
@@ -122,11 +125,52 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
       }, 5000)
     }, [step])
 
+    useEffect(() => {
+      if (role === "master") {
+        if (storeId && platform && location) {
+          setIsAllSet(true)
+        } else {
+          setIsAllSet(false)
+        }
+      } else {
+        if (storeId && location) {
+          setIsAllSet(true)
+        } else {
+          setIsAllSet(false)
+        }
+      }
+    }, [storeId, platform, location])
+
     const { value: recentMatchingNumber } = useCountUp({
       isCounting: isCounting,
       end: 9999,
       duration: 1000,
     })
+
+    const handleNextButton = () => {
+      step === 1 ? setStep(2) : step === 2 ? setStep(3) : setStep(3)
+
+      if (isAllSet) {
+        navigate("signIn")
+      } else {
+        if (role === "master") {
+          if (!storeId) {
+            alert("매장을 선택해주세요")
+          } else if (!platform) {
+            alert("배달 플랫폼을 선택해주세요")
+          } else if (!location) {
+            alert("장소를 선택해주세요")
+          }
+        } else {
+          if (!storeId) {
+            alert("매장을 선택해주세요")
+          } else if (!location) {
+            alert("장소를 선택해주세요")
+          }
+        }
+      }
+    }
+    // const [nextButtonText, setNextButtonText] = useState( "다음")
 
     return (
       // <Screen style={ROOT} preset="scroll">
@@ -195,34 +239,37 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
               {step === 1 && (
                 <Center bg="primary.100" borderRadius="sm" px="4" py="4" mt="2" alignSelf="center">
                   <HStack space="4" mb="4">
-                    {stores.slice(0, 4).map((item) => (
+                    {stores.slice(0, 4).map((item, index) => (
                       <Store
                         imgUri={item.image}
                         id={item.id}
                         setState={setStoreId}
                         state={storeId}
+                        key={index}
                       />
                     ))}
                   </HStack>
 
                   <HStack space="4" mb="4">
-                    {stores.slice(4, 8).map((item) => (
+                    {stores.slice(4, 8).map((item, index) => (
                       <Store
                         imgUri={item.image}
                         id={item.id}
                         setState={setStoreId}
                         state={storeId}
+                        key={index}
                       />
                     ))}
                   </HStack>
 
                   <HStack space="4">
-                    {stores.slice(8, 12).map((item) => (
+                    {stores.slice(8, 12).map((item, index) => (
                       <Store
                         imgUri={item.image}
                         id={item.id}
                         setState={setStoreId}
                         state={storeId}
+                        key={index}
                       />
                     ))}
                   </HStack>
@@ -488,7 +535,16 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
             </Box>
           </VStack>
 
-          <Button w="100%" mt="auto" mb="2" colorScheme="secondary">
+          <Button
+            w="100%"
+            mt="auto"
+            mb="2"
+            colorScheme="secondary"
+            onPress={() => {
+              handleNextButton()
+              LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+            }}
+          >
             <Text
               fontSize="sm"
               fontWeight="600"
@@ -497,15 +553,6 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
               fontSize="xl"
               fontFamily="kr"
               children={step === 3 ? "매칭 시작하기" : "다음"}
-              onPress={() => {
-                step === 1
-                  ? setStep(2)
-                  : step === 2
-                  ? setStep(3)
-                  : step === 3
-                  ? navigate("signIn")
-                  : alert("지금 하프딜리버리를 가입하고 매칭을 시작해보세요 :) ")
-              }}
             />
           </Button>
         </Center>

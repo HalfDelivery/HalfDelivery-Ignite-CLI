@@ -61,4 +61,29 @@ export const color = {
    * white background
    */
   storybookTextColor: palette.black,
+
+  p: {
+    50: "#e8eaf6",
+    100: "#c4cae8",
+    200: "#9da9d9",
+    300: "#7687c9",
+    400: "#576dbe",
+    500: "#3753b3",
+    600: "#314ba9",
+    700: "#27419d",
+    800: "#1e3791",
+    900: "#0E257C",
+  },
+  s: {
+    50: "#FFF3F4",
+    100: "#FFE8E9",
+    200: "#FFDDDF",
+    300: "#FFD5D7",
+    400: "#FFCDCF",
+    500: "#FFC2C3",
+    600: "#FFB6B6",
+    700: "#FF9FA1",
+    800: "#FF888C",
+    900: "#FF7177",
+  },
 }
