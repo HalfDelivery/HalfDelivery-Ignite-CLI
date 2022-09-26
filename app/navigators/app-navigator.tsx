@@ -18,6 +18,7 @@ import {
 } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
+import { MatchingRoomsScreen } from "../screens/matching-rooms/matching-rooms-screen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -50,7 +51,7 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="main"
+      initialRouteName="matchingRooms"
     >
       <Stack.Screen name="main" component={MainScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
@@ -60,6 +61,7 @@ const AppStack = () => {
       <Stack.Screen name="simple-home-screen" component={SimpleHomeScreen} />
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="signIn" component={SignInScreen} />
+      <Stack.Screen name="matchingRooms" component={MatchingRoomsScreen} />
     </Stack.Navigator>
   )
 }
