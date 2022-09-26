@@ -147,25 +147,59 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
       duration: 1000,
     })
 
+    const handleStep2bg = (step: number) => {
+      if (step === 2) {
+        return "primary.700"
+      } else {
+        if (role === "master") {
+          if (platform) {
+            return "primary.100"
+          } else {
+            return "gray.300"
+          }
+        } else {
+          return "primary.100"
+        }
+      }
+    }
+
     const handleNextButton = () => {
       step === 1 ? setStep(2) : step === 2 ? setStep(3) : setStep(3)
 
       if (isAllSet) {
         navigate("signIn")
       } else {
+        //* 마스터일 경우
         if (role === "master") {
-          if (!storeId) {
+          if (!storeId && !platform && !location) {
+            alert("매장과 플랫폼과 장소를 선택해주세요")
+            return 0
+          } else if (!storeId && !platform) {
+            alert("매장과 플랫폼 선택해주세요")
+            return 0
+          } else if (!storeId) {
             alert("매장을 선택해주세요")
+            return 0
           } else if (!platform) {
             alert("배달 플랫폼을 선택해주세요")
+            return 0
           } else if (!location) {
             alert("장소를 선택해주세요")
+            return 0
           }
-        } else {
-          if (!storeId) {
+        }
+
+        //* 파트너일 경우
+        else if (role === "partner") {
+          if (!storeId && !location) {
+            alert("매장과 장소를 선택해주세요")
+            return 0
+          } else if (!storeId) {
             alert("매장을 선택해주세요")
+            return 0
           } else if (!location) {
             alert("장소를 선택해주세요")
+            return 0
           }
         }
       }
@@ -211,12 +245,16 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
             </Box>
 
             {/* //* 1. 매장 선택 */}
-            <Box
+            <Pressable
               bg={step === 1 ? "p.700" : storeId !== null ? "p.100" : "gray.300"}
               borderRadius="sm"
               px="4"
               py="4"
               shadow="2"
+              onPress={() => {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+                setStep(step !== 1 ? 1 : null)
+              }}
             >
               <Text
                 children={
@@ -231,10 +269,6 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                 fontWeight={step === 1 ? "600" : "400"}
                 fontFamily="kr"
                 mb={step === 1 ? "2" : null}
-                onPress={() => {
-                  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-                  setStep(step !== 1 ? 1 : null)
-                }}
               />
               {step === 1 && (
                 <Center bg="primary.100" borderRadius="sm" px="4" py="4" mt="2" alignSelf="center">
@@ -275,15 +309,19 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                   </HStack>
                 </Center>
               )}
-            </Box>
+            </Pressable>
 
             {/* //* 2. 역할 선택 */}
-            <Box
-              bg={step === 2 ? "primary.700" : platform !== null ? "p.100" : "gray.300"}
+            <Pressable
+              bg={handleStep2bg(step)}
               borderRadius="sm"
               px="4"
               py="4"
               shadow="2"
+              onPress={() => {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+                setStep(step !== 2 ? 2 : null)
+              }}
             >
               <Text
                 children={
@@ -303,10 +341,6 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                 fontWeight={step === 2 ? "600" : "400"}
                 fontFamily="kr"
                 mb={step === 2 ? "2" : null}
-                onPress={() => {
-                  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-                  setStep(step !== 2 ? 2 : null)
-                }}
               />
               {step === 2 && (
                 <Center>
@@ -429,15 +463,19 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                   </>
                 </Center>
               )}
-            </Box>
+            </Pressable>
 
             {/* //* 3. 장소 선택 */}
-            <Box
+            <Pressable
               bg={step === 3 ? "primary.700" : location !== null ? "p.100" : "gray.300"}
               borderRadius="sm"
               px="4"
               py="4"
               shadow="2"
+              onPress={() => {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+                setStep(step !== 3 ? 3 : null)
+              }}
             >
               <Text
                 children={
@@ -452,10 +490,6 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                 fontWeight={step === 3 ? "600" : "400"}
                 fontFamily="kr"
                 mb={step === 3 ? "2" : null}
-                onPress={() => {
-                  LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-                  setStep(step !== 3 ? 3 : null)
-                }}
               />
               {step === 3 && (
                 <Center>
@@ -532,7 +566,7 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
                   </Box>
                 </Center>
               )}
-            </Box>
+            </Pressable>
           </VStack>
 
           <Button
@@ -546,9 +580,7 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
             }}
           >
             <Text
-              fontSize="sm"
               fontWeight="600"
-              fontFamily="kr"
               color="white"
               fontSize="xl"
               fontFamily="kr"
