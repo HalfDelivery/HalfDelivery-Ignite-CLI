@@ -8,9 +8,10 @@ import { NavigatorParamList } from "../../navigators"
 // import { useStores } from "../../models"
 import { color } from "../../theme"
 import { Screen } from "../../components"
+import Index from "../../components/carousel/carousel"
 
 const ROOT: ViewStyle = {
-  backgroundColor: color.palette.black,
+  backgroundColor: color.palette.offWhite,
   flex: 1,
 }
 
@@ -26,14 +27,23 @@ export const MatchingRoomsScreen: FC<
   const width = Dimensions.get("window").width
   return (
     <Screen style={ROOT} preset="scroll">
-      <View style={{ flex: 1 }}>
+      {/* <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          backgroundColor: "orange",
+        }}
+      >
         <Carousel
+          style={{
+            backgroundColor: "red",
+          }}
           loop
           width={width}
-          height={width / 2}
+          height={width}
           autoPlay={true}
           data={[...new Array(6).keys()]}
-          scrollAnimationDuration={1000}
+          scrollAnimationDuration={2000}
           onSnapToItem={(index) => console.log("current index:", index)}
           renderItem={({ index }) => (
             <View
@@ -47,7 +57,9 @@ export const MatchingRoomsScreen: FC<
             </View>
           )}
         />
-      </View>
+      </View> */}
+
+      <Index />
     </Screen>
   )
 })
