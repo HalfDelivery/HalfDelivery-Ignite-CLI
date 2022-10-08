@@ -15,10 +15,11 @@ import {
   TestScreen,
   SignInScreen,
   MainScreen,
+  MatchingRoomsScreen,
 } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
-import { MatchingRoomsScreen } from "../screens/matching-rooms/matching-rooms-screen"
+import { MatchingWaitingScreen } from "../screens/MatchingWaitingScreen/MatchingWaitingScreen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -40,6 +41,7 @@ export type NavigatorParamList = {
   "test-screen": undefined
   signIn: undefined
   main: undefined
+  waiting: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -51,17 +53,18 @@ const AppStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="matchingRooms"
+      initialRouteName="waiting"
     >
-      <Stack.Screen name="main" component={MainScreen} />
       <Stack.Screen name="welcome" component={WelcomeScreen} />
       <Stack.Screen name="demo" component={DemoScreen} />
       <Stack.Screen name="demoList" component={DemoListScreen} />
       <Stack.Screen name="test-screen" component={TestScreen} />
       <Stack.Screen name="simple-home-screen" component={SimpleHomeScreen} />
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="main" component={MainScreen} />
       <Stack.Screen name="signIn" component={SignInScreen} />
       <Stack.Screen name="matchingRooms" component={MatchingRoomsScreen} />
+      <Stack.Screen name="waiting" component={MatchingWaitingScreen} />
     </Stack.Navigator>
   )
 }
