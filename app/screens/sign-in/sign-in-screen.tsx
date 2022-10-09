@@ -22,12 +22,12 @@ import {
   StatusBar,
   Stack,
   Box,
+  FormControl,
 } from "native-base"
 import { AntDesign, Entypo } from "@expo/vector-icons"
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 import { FloatingLabelInput, IconGoogle } from "../../components"
 import { BarInput } from "../../components/bar-input/bar-input"
-import { OtpVerification } from "../../components/otp-verification/otp-verification"
 // import { FloatingLabelInput, IconGoogle } from "#components"
 // import { IconGoogle } from "./app/components/icon-google/icon-google"
 // import { FloatingLabelInput } from "./app/components/floating-label-input/floating-label-input"
@@ -63,13 +63,13 @@ export function SignInForm({ props }: any) {
             <VStack space="2">
               <VStack space="4">
                 <Text color="p.900" fontSize="md" fontFamily="kr">
-                  휴대폰번호를 입력해주세요
+                  휴대폰번호를 입력하세요
                 </Text>
                 <BarInput
                   placeholder={"01012345678"}
-                  stateFn={setPassword}
                   autoCapitalize="none"
                   value={password}
+                  stateFn={setPassword}
                   isValued={password ? true : false}
                   error={passwordErrorMessage ? true : false}
                 />
@@ -150,7 +150,7 @@ export function SignInForm({ props }: any) {
                   bg: "primary.700",
                 }}
                 onPress={() => {
-                  props.navigation.navigate("OTP")
+                  alert("인증번호: 1234")
                 }}
                 fontFamily="en"
               >
@@ -200,6 +200,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
 
     // Pull in navigation via hook
     // const navigation = useNavigation()
+    const [otp, setOtp] = useState("")
 
     return (
       <>
@@ -219,6 +220,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
                   pl="0"
                   onPress={() => {
                     goBack()
+                    // navigate("main")
                   }}
                   icon={<Icon size="6" as={AntDesign} name="arrowleft" color="coolGray.50" />}
                 />
@@ -232,7 +234,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
                 </Text>
                 <VStack space="1">
                   <Text
-                    fontSize="md"
+                    fontSize="xs"
                     fontWeight="normal"
                     _dark={{
                       color: "coolGray.400",
@@ -244,7 +246,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
                     휴대폰 번호로 간단하게
                   </Text>
                   <Text
-                    fontSize="md"
+                    fontSize="xs"
                     fontWeight="normal"
                     _dark={{
                       color: "coolGray.400",
@@ -259,7 +261,77 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
               </VStack>
             </VStack>
 
-            <OtpVerification />
+            <VStack
+              px="4"
+              py="2"
+              // justifyContent="space-between"
+              bg="p.100"
+              borderRadius="xl"
+              w="94%"
+              alignSelf="center"
+            >
+              <Box>
+                <VStack>
+                  <Text color="p.900" fontSize="md" fontFamily="kr" mt="4">
+                    인증번호를 입력하세요
+                  </Text>
+                  {/* <HStack space="2" alignItems="center">
+                    <Text _light={{ color: "coolGray.800" }} _dark={{ color: "coolGray.400" }}>
+                      We have sent the OTP code to
+                      
+                    </Text>
+                    <Text
+                      fontWeight="bold"
+                      _light={{ color: "coolGray.800" }}
+                      _dark={{ color: "coolGray.300" }}
+                    >
+                      87******47
+                    </Text>
+                  </HStack> */}
+                </VStack>
+                <VStack space="12" mt="4">
+                  <FormControl>
+                    <BarInput
+                      placeholder={"0000"}
+                      autoCapitalize="none"
+                      value={otp}
+                      stateFn={setOtp}
+                      style={{
+                        height: 40,
+                        width: 70,
+                        backgroundColor: "white",
+                        alignSelf: "center",
+                        borderRadius: 20,
+                        paddingBottom: 0,
+                        borderBottomWidth: 0,
+                      }}
+                      // isValued={password ? true : false}
+                      // error={passwordErrorMessage ? true : false}
+                    />
+
+                    <FormControl.HelperText mt="7">
+                      <HStack>
+                        <Link
+                          ml="auto"
+                          bg="s.100"
+                          borderRadius="md"
+                          px="3"
+                          py="1"
+                          mb="3"
+                          onPress={() => {
+                            navigate("waiting")
+                          }}
+                        >
+                          <Text color="black" fontSize="sm" fontFamily="kr">
+                            인증완료
+                          </Text>
+                        </Link>
+                      </HStack>
+                    </FormControl.HelperText>
+                  </FormControl>
+                </VStack>
+              </Box>
+            </VStack>
             <SignInForm props={props} />
           </Stack>
         </Center>

@@ -12,7 +12,7 @@ const Container = styled.TextInput`
   border-bottom-width: 1.5px;
   border-bottom-color: ${({ isValued, error }) =>
     error ? color.error : isValued ? color.p[900] : color.p[100]};
-  font-family: "kr";
+  /* font-family: "kr"; */
   include-font-padding: false;
   text-align-vertical: center;
   font-size: 22px;

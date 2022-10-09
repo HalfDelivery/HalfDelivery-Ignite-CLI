@@ -3,7 +3,8 @@ export const users = [
     id: 0,
     username: "나",
     imageUri:
-      "https://imgsrv2.voi.id/mAIRuYgHZLUNzDUnKUb0gL32jOGteaETpKvAcCO2S4A/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy83MTE0Mi8yMDIxMDcyOTA5MDUtbWFpbi5jcm9wcGVkXzE2Mjc1MjQzNTUuanBn.jpg",
+      // "https://imgsrv2.voi.id/mAIRuYgHZLUNzDUnKUb0gL32jOGteaETpKvAcCO2S4A/auto/1200/675/sm/1/bG9jYWw6Ly8vcHVibGlzaGVycy83MTE0Mi8yMDIxMDcyOTA5MDUtbWFpbi5jcm9wcGVkXzE2Mjc1MjQzNTUuanBn.jpg",
+      undefined,
     orderPrice: 20000,
   },
   {
