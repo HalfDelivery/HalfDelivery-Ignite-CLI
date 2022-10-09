@@ -4,8 +4,15 @@ import styled from "styled-components"
 import { width, height } from "./utils"
 import colors from "./colors"
 import RoundedBtn from "./RoundedBtn"
+import { goBack, navigate } from "../../navigators"
 
-const PriceReadyBoxHost = ({ totalPrice = undefined, isAllReady = true, style }) => {
+const PriceReadyBoxHost = ({
+  totalPrice = undefined,
+  isAllReady = true,
+  users = undefined,
+  style,
+}) => {
+  // console.log("users", users)
   return (
     <Root style={style}>
       <Left>
@@ -84,9 +91,7 @@ const PriceReadyBoxHost = ({ totalPrice = undefined, isAllReady = true, style })
           isPressed={isAllReady}
           onPress={() => {
             // isReady ? setIsReady(false) : setIsReady(true);
-            isAllReady
-              ? alert("다음 화면으로 이동")
-              : alert("모든 참가자가 Ready 를 완료해야 합니다")
+            isAllReady ? navigate("chat", users) : alert("모든 참가자가 Ready 를 완료해야 합니다")
           }}
         />
       </Right>

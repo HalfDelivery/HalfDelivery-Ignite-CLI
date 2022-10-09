@@ -20,6 +20,7 @@ import {
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
 import { MatchingWaitingScreen } from "../screens/MatchingWaitingScreen/MatchingWaitingScreen"
+import { ChatRoomScreen } from "../screens/ChatRoomScreen/ChatRoomScreen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -42,6 +43,7 @@ export type NavigatorParamList = {
   signIn: undefined
   main: undefined
   waiting: undefined
+  chat: undefined
 }
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -65,6 +67,7 @@ const AppStack = () => {
       <Stack.Screen name="signIn" component={SignInScreen} />
       <Stack.Screen name="matchingRooms" component={MatchingRoomsScreen} />
       <Stack.Screen name="waiting" component={MatchingWaitingScreen} />
+      <Stack.Screen name="chat" component={ChatRoomScreen} />
     </Stack.Navigator>
   )
 }

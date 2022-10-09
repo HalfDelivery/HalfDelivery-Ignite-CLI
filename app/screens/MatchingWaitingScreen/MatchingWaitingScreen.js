@@ -60,6 +60,7 @@ export const MatchingWaitingScreen = () => {
         <PriceReadyBoxHost
           style={{ marginTop: 30 }}
           totalPrice={users.reduce((accum, curValue) => accum + curValue.orderPrice, 0)}
+          users={users}
         />
       </CollapsibleView>
     </Root>
