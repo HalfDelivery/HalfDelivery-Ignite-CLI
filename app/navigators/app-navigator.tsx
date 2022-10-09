@@ -21,6 +21,7 @@ import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import { SimpleHomeScreen } from "../screens/home/simple-home-screen/simple-home-screen"
 import { MatchingWaitingScreen } from "../screens/MatchingWaitingScreen/MatchingWaitingScreen"
 import { ChatRoomScreen } from "../screens/ChatRoomScreen/ChatRoomScreen"
+import { LottieAnimationScreen } from "../screens/LottieAnimation-screen"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -42,6 +43,7 @@ export type NavigatorParamList = {
   "test-screen": undefined
   signIn: undefined
   main: undefined
+  lottieAnimation: undefined
   waiting: undefined
   chat: undefined
 }
@@ -65,7 +67,8 @@ const AppStack = () => {
       {/** 🔥 Your screens go here */}
       <Stack.Screen name="main" component={MainScreen} />
       <Stack.Screen name="signIn" component={SignInScreen} />
-      <Stack.Screen name="matchingRooms" component={MatchingRoomsScreen} />
+      {/* <Stack.Screen name="matchingRooms" component={MatchingRoomsScreen} /> */}
+      <Stack.Screen name="lottieAnimation" component={LottieAnimationScreen} />
       <Stack.Screen name="waiting" component={MatchingWaitingScreen} />
       <Stack.Screen name="chat" component={ChatRoomScreen} />
     </Stack.Navigator>

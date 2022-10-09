@@ -319,7 +319,7 @@ export const SignInScreen: FC<StackScreenProps<NavigatorParamList, "signIn">> = 
                           py="1"
                           mb="3"
                           onPress={() => {
-                            navigate("waiting")
+                            navigate("lottieAnimation")
                           }}
                         >
                           <Text color="black" fontSize="sm" fontFamily="kr">
