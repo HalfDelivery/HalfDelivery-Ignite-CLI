@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useNavigation } from "@react-navigation/native"
-import { View, Button, Text, StyleSheet, Image, ScrollView } from "react-native"
+import { View } from "react-native"
+import { Box, Center, HStack, Image, Text } from "native-base"
 import styled from "styled-components"
-import colors from "./colors"
 import { width, height } from "./utils"
 import CollapsibleView from "./CollapsableView"
 import DeliveryInfo_DlvTip from "./DeliveryInfo_DlvTip"
@@ -21,6 +21,7 @@ import {
   locationAtom,
 } from "../../recoil/atoms/matchingInfoAtoms.js"
 import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil"
+import { color } from "../../theme"
 
 const MatchingInfoRoot_HEIGHT = 656
 
@@ -35,13 +36,64 @@ export const MatchingWaitingScreen = () => {
 
   return (
     <Root>
-      <View style={{ width: "100%", height: 200, backgroundColor: "pink" }}>
-        <Text>
-          {/* {storeImage} */}
-          {role}
-          {platform}
-          {location}
-        </Text>
+      <View
+        style={{
+          width: "100%",
+          height: 200,
+          backgroundColor: color.p[900],
+          justifyContent: "center",
+        }}
+      >
+        <View style={{ flexDirection: "row", justifyContent: "space-evenly", marginTop: 20 }}>
+          {/* //* 매장 */}
+          <Image
+            source={{
+              uri: storeImage,
+            }}
+            alt="Loading..."
+            size="md"
+            borderRadius={"xl"}
+            borderWidth={1.5}
+            borderColor="black"
+          />
+
+          {/* //* 플랫폼 */}
+          <Image
+            source={{
+              uri:
+                "https://play-lh.googleusercontent.com/8uMTbCdy6B93EGM5p6tfOVWnkDpee5ZOVYfaBgsWciG77nxZEpjltRtaOTxsI52x8Q",
+            }}
+            alt="Loading..."
+            size="md"
+            borderRadius={"xl"}
+            borderWidth={1.5}
+            borderColor="black"
+          />
+
+          {/* //* 장소 */}
+          <Box
+            bg={"primary.300"}
+            borderRadius={"xl"}
+            borderWidth={1.5}
+            borderColor="black"
+            px="4"
+            py="4"
+            justifyContent={"center"}
+            // onPress={() => {
+            //   setLocation("창의관")
+            // }}
+          >
+            <Text
+              fontSize={"xl"}
+              fontWeight="600"
+              fontFamily="kr"
+              color="white"
+              alignSelf={"center"}
+            >
+              {location}
+            </Text>
+          </Box>
+        </View>
       </View>
       {/* 배달 정보 */}
       <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 200} isOpen={true}>
