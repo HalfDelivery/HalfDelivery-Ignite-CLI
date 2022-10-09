@@ -13,6 +13,14 @@ import BarInput from "./BarInput"
 // import PriceReadyBoxPartner from "./PriceReadyBoxPartner"
 import Timer from "./Timer"
 import { users } from "../../../assets/sampleData/users"
+import {
+  storeIdAtom,
+  storeImageAtom,
+  roleAtom,
+  platformAtom,
+  locationAtom,
+} from "../../recoil/atoms/matchingInfoAtoms.js"
+import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil"
 
 const MatchingInfoRoot_HEIGHT = 656
 
@@ -20,9 +28,21 @@ export const MatchingWaitingScreen = () => {
   const navigation = useNavigation()
   const [myPrice, setMyPrice] = useState(null)
 
+  const storeImage = useRecoilValue(storeImageAtom) // 읽기 전용!
+  const role = useRecoilValue(roleAtom) // 읽기 전용!
+  const platform = useRecoilValue(platformAtom) // 읽기 전용!
+  const location = useRecoilValue(locationAtom) // 읽기 전용!
+
   return (
     <Root>
-      <View style={{ width: "100%", height: 200, backgroundColor: "pink" }} />
+      <View style={{ width: "100%", height: 200, backgroundColor: "pink" }}>
+        <Text>
+          {/* {storeImage} */}
+          {role}
+          {platform}
+          {location}
+        </Text>
+      </View>
       {/* 배달 정보 */}
       <CollapsibleView sectionTitle={"배달 정보"} maxheight={height * 200} isOpen={true}>
         <DeliveryInfo_DlvTip />

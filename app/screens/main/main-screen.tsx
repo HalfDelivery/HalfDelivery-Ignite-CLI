@@ -20,6 +20,14 @@ import {
 } from "native-base"
 import { stores as _stores } from "../../../assets/sampleData/stores"
 import { CountUp, useCountUp } from "use-count-up" //? https://github.com/vydimitrov/use-count-up
+import {
+  storeIdAtom,
+  storeImageAtom,
+  roleAtom,
+  platformAtom,
+  locationAtom,
+} from "../../recoil/atoms/matchingInfoAtoms.js"
+import { useRecoilState, useRecoilValue, useSetRecoilState, useResetRecoilState } from "recoil"
 
 const Store = ({ imgUri, id, setState, state }) => (
   <Pressable
@@ -103,6 +111,35 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
     const [isCounting, setIsCounting] = useState(true)
     const [isAllSet, setIsAllSet] = useState(false)
 
+    // const [counter, setCounter] = useRecoilState(storeIdAtom)
+    // useState와 같지만, useRecoilState을 사용하여 다른 파일에 있는 아톰을 읽을 수 있다.
+    // const currentCount = useRecoilValue(countState) // 읽기 전용!
+    // const resetCounter = useResetRecoilState(countState) // 디폴트값으로 값 변경
+
+    // const plusCount = () => {
+    //   counterHandler((pre) => pre + 1)
+    // }
+    // const minusCount = () => {
+    //   counterHandler((pre) => pre - 1)
+    // }
+
+    const storeIdAtomHandler = useSetRecoilState(storeIdAtom) // 값만 변경 시키기
+    const storeImageAtomHandler = useSetRecoilState(storeImageAtom) // 값만 변경 시키기
+    const roleAtomHandler = useSetRecoilState(roleAtom) // 값만 변경 시키기
+    const platformAtomHandler = useSetRecoilState(platformAtom) // 값만 변경 시키기
+    const locationAtomHandler = useSetRecoilState(locationAtom) // 값만 변경 시키기
+
+    const handleAtoms = () => {
+      storeIdAtomHandler(storeId)
+
+      const targetStore = stores.find((ele) => ele.id === storeId)
+      storeImageAtomHandler(targetStore.image)
+
+      roleAtomHandler(role)
+      platformAtomHandler(platform)
+      locationAtomHandler(location)
+    }
+
     // useLayoutEffect(() => {
     //   // setStores(_stores)
     //   console.log(storeId)
@@ -167,6 +204,7 @@ export const MainScreen: FC<StackScreenProps<NavigatorParamList, "main">> = obse
       step === 1 ? setStep(2) : step === 2 ? setStep(3) : setStep(3)
 
       if (isAllSet) {
+        handleAtoms()
         navigate("signIn")
       } else {
         //* 마스터일 경우

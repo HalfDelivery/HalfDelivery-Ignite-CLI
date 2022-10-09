@@ -59,6 +59,7 @@
     "reactotron-mst": "3.1.4",
     "reactotron-react-js": "^3.3.7",
     "reactotron-react-native": "5.0.1",
+    "recoil": "^0.7.5",
     "styled-components": "^5.3.5",
     "use-count-up": "^3.0.1",
     "validate.js": "0.13.1"

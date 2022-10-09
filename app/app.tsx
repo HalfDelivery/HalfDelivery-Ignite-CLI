@@ -20,6 +20,7 @@ import { RootStore, RootStoreProvider, setupRootStore } from "./models"
 import { ToggleStorybook } from "../storybook/toggle-storybook"
 import { ErrorBoundary } from "./screens/error/error-boundary"
 import { extendTheme, NativeBaseProvider } from "native-base"
+import { RecoilRoot } from "recoil"
 
 const theme = extendTheme({
   colors: {
@@ -161,18 +162,20 @@ function App() {
 
   return (
     <ToggleStorybook>
-      <RootStoreProvider value={rootStore}>
-        <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-          <ErrorBoundary catchErrors={"always"}>
-            <NativeBaseProvider theme={theme}>
-              <AppNavigator
-                initialState={initialNavigationState}
-                onStateChange={onNavigationStateChange}
-              />
-            </NativeBaseProvider>
-          </ErrorBoundary>
-        </SafeAreaProvider>
-      </RootStoreProvider>
+      <RecoilRoot>
+        <RootStoreProvider value={rootStore}>
+          <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+            <ErrorBoundary catchErrors={"always"}>
+              <NativeBaseProvider theme={theme}>
+                <AppNavigator
+                  initialState={initialNavigationState}
+                  onStateChange={onNavigationStateChange}
+                />
+              </NativeBaseProvider>
+            </ErrorBoundary>
+          </SafeAreaProvider>
+        </RootStoreProvider>
+      </RecoilRoot>
     </ToggleStorybook>
   )
 }
