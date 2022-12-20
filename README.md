@@ -1,5 +1,6 @@
 # HalfDelivery
-## Order Together, Pay Less!
+``` Order Together, Pay Less!```
+
 ![image](https://user-images.githubusercontent.com/70505699/208673602-ca173cf9-34ff-48fc-8f8d-5030a3a6e93e.png)
 ![image](https://user-images.githubusercontent.com/70505699/208673639-9d21066c-23db-42e7-94d6-695325d10d2e.png)
 ![image](https://user-images.githubusercontent.com/70505699/208673673-1833be41-1be3-47f6-9dd8-b4975d84a857.png)
